@@ -86,7 +86,6 @@ public class ListFragment extends Fragment {
         _recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         _recyclerView.setHasFixedSize(true);
         Field[] fields=R.raw.class.getFields();
-        int id=0;
         RecViewAdapter recViewAdapter = new RecViewAdapter(fields);
         _recyclerView.setAdapter(recViewAdapter);
     }

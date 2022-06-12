@@ -35,6 +35,7 @@ public class VideoFragment extends Fragment {
     private String mParam2;
 
     private SharedViewModel _sharedViewModel;
+    private VideoView _videoView;
 
     public VideoFragment() {
         // Required empty public constructor
@@ -77,6 +78,7 @@ public class VideoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         _sharedViewModel = new ViewModelProvider(getActivity()).get(SharedViewModel.class);
+        _videoView = container.findViewById(R.id.videoView);
         return inflater.inflate(R.layout.fragment_video, container, false);
     }
 
@@ -94,14 +96,13 @@ public class VideoFragment extends Fragment {
                     e.printStackTrace();
                 }
                 String video_url = "android.resource://" + view.getContext().getPackageName() + "/" + id;
-                VideoView videoView = view.findViewById(R.id.videoView);
                 Uri videoUri = Uri.parse(video_url);
                 MediaController mediaController= new MediaController(view.getContext());
-                mediaController.setAnchorView(videoView);
-                videoView.setMediaController(mediaController);
-                videoView.setVideoURI(videoUri);
-                videoView.requestFocus();
-                videoView.start();
+                mediaController.setAnchorView(_videoView);
+                _videoView.setMediaController(mediaController);
+                _videoView.setVideoURI(videoUri);
+                _videoView.requestFocus();
+                _videoView.start();
             }
         });
     }

@@ -14,10 +14,12 @@ public class MainActivity extends AppCompatActivity {
     private VideoFragment _videoFragment;
     private ListFragment _listFragment;
     private SharedViewModel _sharedViewMoel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         _sharedViewMoel = new ViewModelProvider(this).get(SharedViewModel.class);
         _fragMan = getSupportFragmentManager();
         _fragTrans = _fragMan.beginTransaction();

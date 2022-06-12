@@ -26,7 +26,6 @@ import java.util.logging.Logger;
 
 public class RecViewAdapter extends RecyclerView.Adapter<RecViewAdapter.RecViewViewHoder> {
     private Field[] _fields;
-    private SharedViewModel _sharedViewModel;
     public RecViewAdapter(Field[] names) {
         this._fields = names;
     }
@@ -37,7 +36,6 @@ public class RecViewAdapter extends RecyclerView.Adapter<RecViewAdapter.RecViewV
         //Creating the layout for the single item of recyclerview
         LinearLayout itemLayout =(LinearLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item,parent,false);
         RecViewViewHoder recViewViewHoder = new RecViewViewHoder(itemLayout);
-        _sharedViewModel = new ViewModelProvider((ViewModelStoreOwner) parent.getContext()).get(SharedViewModel.class);
         return recViewViewHoder;
     }
 
@@ -109,7 +107,5 @@ public class RecViewAdapter extends RecyclerView.Adapter<RecViewAdapter.RecViewV
             _videoThumbnail.setOnClickListener(listener);
             _videoResolution.setOnClickListener(listener);
         }
-
-
     }
 }
