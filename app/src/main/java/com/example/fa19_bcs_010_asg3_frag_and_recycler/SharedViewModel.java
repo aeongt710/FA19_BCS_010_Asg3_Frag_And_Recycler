@@ -14,12 +14,4 @@ public class SharedViewModel extends ViewModel {
         _field = new MutableLiveData<>();
     }
 
-    public void UpdateVideoLink(Field f)
-    {
-        _field.setValue(f);
-    }
-
-    public Field getVideoLink(){
-        return this._field.getValue();
-    }
 }

@@ -45,6 +45,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:mipmap/sym_def_app_icon" />
+
+        <TextView
+            android:id="@+id/video_resolution"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="TextView"
+            app:layout_constraintStart_toEndOf="@+id/video_duration"
+            app:layout_constraintTop_toBottomOf="@+id/video_text" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

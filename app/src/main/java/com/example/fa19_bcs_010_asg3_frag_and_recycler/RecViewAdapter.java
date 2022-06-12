@@ -45,17 +45,23 @@ public class RecViewAdapter extends RecyclerView.Adapter<RecViewAdapter.RecViewV
     public void onBindViewHolder(@NonNull RecViewViewHoder holder, int position) {
 
         holder._videoText.setText(_fields[position].getName());
+
         try {
             int id=_fields[position].getInt(null);
-            String video_url = "android.resource://" + holder.itemView.getContext().getPackageName() + "/" + id;
             MediaMetadataRetriever retriever = new MediaMetadataRetriever();
             AssetFileDescriptor afd=holder.itemView.getResources().openRawResourceFd(id);
             retriever.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+
             long duration = Long.parseLong(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
             Bitmap bitmap = retriever.getFrameAtTime(20000000, MediaMetadataRetriever.OPTION_CLOSEST_SYNC);
+            String height = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT);
+            String width = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH);
+
             holder._videoDuration.setText(getTime(duration));
             holder._videoThumbnail.setImageBitmap(bitmap);
             holder._videoDuration.setText(getTime(duration));
+            holder._videoResolution.setText(height+"x"+width);
+
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
@@ -69,25 +75,6 @@ public class RecViewAdapter extends RecyclerView.Adapter<RecViewAdapter.RecViewV
     }
 
 
-    public Bitmap retriveVideoFrameFromVideo(String videoPath) throws Throwable {
-        Bitmap bitmap = null;
-        MediaMetadataRetriever mediaMetadataRetriever = null;
-        try {
-            mediaMetadataRetriever = new MediaMetadataRetriever();
-            mediaMetadataRetriever.setDataSource(videoPath, new HashMap<String, String>());
-            //   mediaMetadataRetriever.setDataSource(videoPath);
-            bitmap = mediaMetadataRetriever.getFrameAtTime();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new Throwable("Exception in retriveVideoFrameFromVideo(String videoPath)" + e.getMessage());
-
-        } finally {
-            if (mediaMetadataRetriever != null) {
-                mediaMetadataRetriever.release();
-            }
-        }
-        return bitmap;
-    }
     @Override
     public int getItemCount() {
         return _fields.length;
@@ -101,6 +88,7 @@ public class RecViewAdapter extends RecyclerView.Adapter<RecViewAdapter.RecViewV
         public SharedViewModel _sharedViewModel;
         public TextView _videoDuration;
         public ImageView _videoThumbnail;
+        public TextView _videoResolution;
 
         public RecViewViewHoder(@NonNull View itemView)  {
             super(itemView);
@@ -108,6 +96,7 @@ public class RecViewAdapter extends RecyclerView.Adapter<RecViewAdapter.RecViewV
             _videoText = itemView.findViewById(R.id.video_text);
             _videoDuration = itemView.findViewById(R.id.video_duration);
             _videoThumbnail = itemView.findViewById(R.id.video_thumbnail);
+            _videoResolution = itemView.findViewById(R.id.video_resolution);
 
             View.OnClickListener listener = new View.OnClickListener() {
                 @Override
@@ -118,6 +107,7 @@ public class RecViewAdapter extends RecyclerView.Adapter<RecViewAdapter.RecViewV
             _videoText.setOnClickListener(listener);
             _videoDuration.setOnClickListener(listener);
             _videoThumbnail.setOnClickListener(listener);
+            _videoResolution.setOnClickListener(listener);
         }
 
 
