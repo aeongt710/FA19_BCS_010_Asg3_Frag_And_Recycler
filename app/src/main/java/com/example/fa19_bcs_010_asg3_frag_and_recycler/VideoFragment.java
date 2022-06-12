@@ -86,6 +86,8 @@ public class VideoFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        _videoView = view.findViewById(R.id.videoView);
+
         _sharedViewModel._field.observe(getActivity(), new Observer<Field>() {
             int id=0;
             @Override

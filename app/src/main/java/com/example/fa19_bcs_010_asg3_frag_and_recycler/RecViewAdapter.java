@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 
 public class RecViewAdapter extends RecyclerView.Adapter<RecViewAdapter.RecViewViewHoder> {
     private Field[] _fields;
+
     public RecViewAdapter(Field[] names) {
         this._fields = names;
     }
@@ -77,8 +78,6 @@ public class RecViewAdapter extends RecyclerView.Adapter<RecViewAdapter.RecViewV
     public int getItemCount() {
         return _fields.length;
     }
-
-
 
     public class RecViewViewHoder extends RecyclerView.ViewHolder {
 
